@@ -1,7 +1,8 @@
 console.log("JS cargado correctamente");
 
-const SUPABASE_URL = "https://qjiukmeieepddplhrakw.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqaXVrbWVpZWVwZGRwbGhyYWt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MDQ5NzYsImV4cCI6MjA3MDA4MDk3Nn0.P9JHkkCz9V1CHhInXja8yQmHsHek4LLX6EVHSvCu2LQ";
+const SUPABASE_URL ="https://qjiukmeieepddplhrakw.supabase.co";
+const SUPABASE_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqaXVrbWVpZWVwZGRwbGhyYWt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MDQ5NzYsImV4cCI6MjA3MDA4MDk3Nn0.P9JHkkCz9V1CHhInXja8yQmHsHek4LLX6EVHSvCu2LQ";
+
 
 const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -53,7 +54,7 @@ async function cargarEstudiantes() {
 
   data.forEach((est) => {
     const item = document.createElement("li");
-    item.textContent = `${est.nombre} (${est.clase})`;
+    item.textContent = ${est.nombre} (${est.clase});
     lista.appendChild(item);
   });
 }
@@ -78,7 +79,7 @@ async function subirArchivo() {
     return;
   }
 
-  const nombreRuta = `${user.id}/${archivo.name}`;
+  const nombreRuta = ${user.id}/${archivo.name};
   const { data, error } = await client.storage
     .from("tareas")
     .upload(nombreRuta, archivo, {
@@ -108,7 +109,7 @@ async function listarArchivos() {
 
   const { data, error } = await client.storage
     .from("tareas")
-    .list(`${user.id}`, { limit: 20 });
+    .list(${user.id}, { limit: 20 });
 
   const lista = document.getElementById("lista-archivos");
   lista.innerHTML = "";
@@ -121,7 +122,7 @@ async function listarArchivos() {
   data.forEach(async (archivo) => {
     const { data: signedUrlData, error: signedUrlError } = await client.storage
       .from("tareas")
-      .createSignedUrl(`${user.id}/${archivo.name}`, 60);
+      .createSignedUrl(${user.id}/${archivo.name}, 60);
 
     if (signedUrlError) {
       console.error("Error al generar URL firmada:", signedUrlError.message);
@@ -147,7 +148,7 @@ async function listarArchivos() {
         <a href="${publicUrl}" target="_blank">Ver PDF</a>
       `;
     } else {
-      item.innerHTML = `<a href="${publicUrl}" target="_blank">${archivo.name}</a>`;
+      item.innerHTML = <a href="${publicUrl}" target="_blank">${archivo.name}</a>;
     }
 
     lista.appendChild(item);
